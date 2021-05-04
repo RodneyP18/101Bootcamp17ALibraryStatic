@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LibraryBusinessLogicLayer;
 
 namespace LibraryWebApp.Controllers
 {
     public class HomeController : Controller
     {
+
+        public ActionResult GetRoles()
+        {
+            string dbconn = "Data Source = LAPTOP-286\\SQLEXPRESS;Initial Catalog = Library; Integrated Security = True";
+            RoleBusinessLogic roleBL = new RoleBusinessLogic(dbconn);
+            List<LibraryCommon.Role> _list = roleBL.BLGetRoles();
+            return View();
+        }
+
         public ActionResult Index()
         {
             var _v = View();
