@@ -12,6 +12,7 @@ namespace LibraryWebApp.Controllers
     public class RoleController : Controller
     {
         private readonly string _dbConn;
+
         public RoleController() : base()
         {
             _dbConn = System.Configuration.ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;

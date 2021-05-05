@@ -8,7 +8,7 @@ using System.Web;
 
 namespace LibraryWebApp.Models
 {
-    public class UserModel
+    public class UserModel : BaseModel
     {
         public int UserID { get; set; }
         

@@ -65,7 +65,24 @@ namespace LibraryWebApp.Mapping
 
         internal List<PublisherModel> PublisherListToPublisherModels(List<Publisher> list)
         {
-            throw new NotImplementedException();
+            List<PublisherModel> toReturn = new List<PublisherModel>();
+
+
+            foreach (Publisher publisher in list)
+            {
+                PublisherModel newModel = new PublisherModel();
+
+                newModel.PublisherID = publisher.PublisherID;
+                newModel.Name = publisher.Name;
+                newModel.Address = publisher.Address;
+                newModel.City = publisher.City;
+                newModel.State = publisher.State;
+                newModel.Zip = publisher.Zip;
+
+                toReturn.Add(newModel);
+            }
+
+            return toReturn;
         }
     }
 }

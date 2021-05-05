@@ -4,18 +4,38 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LibraryBusinessLogicLayer;
+using LibraryWebApp.Models;
 
 namespace LibraryWebApp.Controllers
 {
     public class HomeController : Controller
     {
 
-        public ActionResult GetRoles()
+        private readonly string _dbConn;
+
+        // constuctors
+        public HomeController() : base()
         {
-            string dbconn = "Data Source = LAPTOP-286\\SQLEXPRESS;Initial Catalog = Library; Integrated Security = True";
-            RoleBusinessLogic roleBL = new RoleBusinessLogic(dbconn);
-            List<LibraryCommon.Role> _list = roleBL.BLGetRoles();
-            return View();
+            _dbConn = System.Configuration.ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            LoginModel model = new LoginModel();
+            
+            ViewBag.Message = "Login page.";
+            return View(model);
+
+        }
+
+        [HttpGet]
+        public ActionResult Register()
+        {
+            UserModel model = new UserModel();
+
+            ViewBag.Message = "Register page.";
+            return View(model);
         }
 
         public ActionResult Index()

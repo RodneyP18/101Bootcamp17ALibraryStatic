@@ -1,4 +1,5 @@
 ﻿using LibraryBusinessLogicLayer;
+using LibraryCommon;
 using LibraryWebApp.Mapping;
 using LibraryWebApp.Models;
 using System;
@@ -13,9 +14,12 @@ namespace LibraryWebApp.Controllers
     public class PublisherController : Controller
     {
         private readonly string _dbConn;
+        private PublisherBusinessLogic publisherBL;
+
         public PublisherController() : base()
         {
             _dbConn = System.Configuration.ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
+            publisherBL = new PublisherBusinessLogic(_dbConn);
         }
 
         public ActionResult Index()
@@ -26,7 +30,6 @@ namespace LibraryWebApp.Controllers
         [HttpGet]
         public ActionResult GetPublishers()
         {
-            PublisherBusinessLogic publisherBL = new PublisherBusinessLogic(_dbConn);
             List<LibraryCommon.Publisher> _list = publisherBL.BLGetPublishers();
             PublisherListVM model = new PublisherListVM(_list);
             return View(model);
@@ -41,19 +44,63 @@ namespace LibraryWebApp.Controllers
         [HttpPost]
         public ActionResult CreatePublisher(PublisherModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+
+
+                Publisher toAdd = new Publisher();
+
+                toAdd.PublisherID = model.PublisherID;
+                toAdd.Name = model.Name;
+                toAdd.Address = model.Address;
+                toAdd.City = model.City;
+                toAdd.State = model.State;
+                toAdd.Zip = model.Zip;
+
+                publisherBL.BLCreatePublisher(toAdd);
+
+                return RedirectToAction("GetPublishers", "Publisher");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult UpdatePublisher(PublisherModel model, int id)
+        {
+            model.PublisherID = id;
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult UpdatePublisher()
+        public ActionResult UpdatePublisher(PublisherModel model)
         {
-            return View();
+            Publisher toUpdate = new Publisher();
+
+            toUpdate.PublisherID = model.PublisherID;
+            toUpdate.Name = model.Name;
+            toUpdate.Address = model.Address;
+            toUpdate.City = model.City;
+            toUpdate.State = model.State;
+            toUpdate.Zip = model.Zip;
+            
+
+            publisherBL.BLUpdatePublisher(toUpdate);
+
+            return RedirectToAction("GetPublishers", "Publisher");
         }
 
         [HttpPost]
-        public ActionResult DeletePublisher()
+        public ActionResult DeletePublisher(int id)
         {
-            return View();
+            Publisher toDelete = new Publisher();
+            toDelete.PublisherID = id;
+            publisherBL.BLDeletePublisher(toDelete);
+
+            return RedirectToAction("GetPublishers", "Publisher");
         }
+
     }
 }
