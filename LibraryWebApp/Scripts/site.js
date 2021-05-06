@@ -1,8 +1,4 @@
-﻿function search() {
+﻿$(document).ready(function () {
+    $('#tblRoles').DataTable();
+});
 
-    var input = document.getElementById('searchBar').value
-
-    document.getElementById('output').innerHTML = input
-
-
-}

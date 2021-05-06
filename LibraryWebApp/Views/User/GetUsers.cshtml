@@ -1,6 +1,8 @@
 ﻿@model LibraryWebApp.Models.UserListVM
 @using LibraryWebApp.Models
 
+
+
 @{
     ViewBag.Title = "GetUsers";
 }
@@ -8,8 +10,7 @@
 <h2>GetUsers</h2>
 
 
-
-<table id="tblRoles" class="display" style="width:100%">
+<table id="tblUsers" class="display" style="width:100%">
     <thead>
         <tr>
             <th hidden="hidden"></th>
@@ -73,5 +74,20 @@
 </table>
 
 <div>
-    <input value="Add User" type="button" class="btn btn-info" onclick="window.location='@Url.Action("CreateUser", "User")'"/>
+    <input value="Add User" type="button" class="btn btn-info" onclick="window.location='@Url.Action("CreateUser", "User")'" />
 </div>
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#tblUsers').DataTable();
+
+        });
+
+    </script>
+
+}

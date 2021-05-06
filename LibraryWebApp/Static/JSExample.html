@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <input id="displayText" type="text" />
+    
+    <button type="button" onclick="execute()">Run</button>
+
+    <h2>My Output</h2>
+    <p id="output"></p>
+
+    <script>
+        function execute() {
+
+            document.getElementById("output").innerHTML   =    document.getElementById("displayText").value;
+
+        }
+
+    </script>
+</body>
+</html>

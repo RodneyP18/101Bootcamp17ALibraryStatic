@@ -66,6 +66,7 @@ namespace LibraryWebApp.Controllers
         [HttpGet]
         public ActionResult UpdateUser(UserModel model, int id, int roleID)
         {
+            
             model.UserID = id;
             model.RoleID_FK = roleID;
             return View(model);
