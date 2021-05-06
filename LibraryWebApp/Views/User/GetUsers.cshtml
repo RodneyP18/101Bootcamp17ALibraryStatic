@@ -47,6 +47,9 @@
                     <td hidden="hidden">
                         @Html.Hidden(current.RoleID_FK.ToString())
                     </td>
+                    <td hidden="hidden">
+                        @Html.Hidden(current.Salt)
+                    </td>
                     <td>
                         @using (Html.BeginForm("UpdateUser", "User", FormMethod.Get))
                         {
@@ -56,6 +59,7 @@
                             <input type="hidden" name="userName" value="@current.UserName" />
                             <input type="hidden" name="password" value="@current.Password" />
                             <input type="hidden" name="roleID" value="@current.RoleID_FK" />
+                            <input type="hidden" name="salt" value="@current.Salt" />
                             <input class="btn btn-link" type="submit" value="Update" />
                         }
                     </td>

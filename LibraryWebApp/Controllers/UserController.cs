@@ -13,11 +13,14 @@ namespace LibraryWebApp.Controllers
     {
         private readonly string _dbConn;
         private UserBusinessLogic userBL;
+        private RoleBusinessLogic roleBL;
+        
 
         public UserController() : base()
         {
             _dbConn = System.Configuration.ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
             userBL = new UserBusinessLogic(_dbConn);
+            roleBL = new RoleBusinessLogic(_dbConn);
         }
 
         public ActionResult Index()
@@ -36,6 +39,8 @@ namespace LibraryWebApp.Controllers
         [HttpGet]
         public ActionResult CreateUser()
         {
+            RoleListVM list = new RoleListVM(roleBL.BLGetRoles());
+            ViewBag.Roles = new SelectList(list.ListOfRoleModels, "RoleId", "RoleName");
             return View();
         }
 
@@ -66,7 +71,8 @@ namespace LibraryWebApp.Controllers
         [HttpGet]
         public ActionResult UpdateUser(UserModel model, int id, int roleID)
         {
-            
+            RoleListVM list = new RoleListVM(roleBL.BLGetRoles());
+            ViewBag.Roles = new SelectList(list.ListOfRoleModels, "RoleId", "RoleName");
             model.UserID = id;
             model.RoleID_FK = roleID;
             return View(model);
@@ -83,6 +89,7 @@ namespace LibraryWebApp.Controllers
             toUpdate.UserName = model.UserName;
             toUpdate.Password = model.Password;
             toUpdate.RoleID_FK = model.RoleID_FK;
+            toUpdate.Salt = model.Salt;
 
             userBL.BLUpdateUser(toUpdate);
 

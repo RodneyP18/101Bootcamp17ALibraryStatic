@@ -70,8 +70,8 @@ namespace LibraryBusinessLogicLayer
 
         public void BLUpdateUser(User u)
         {
-            string salt = CreateSalt(u.Password.Length);
-            string salted = salt + u.Password;
+            
+            string salted = u.Salt + u.Password;
             String toHash = hash.ComputeSHA256Hash(salted);
             u.Password = toHash;
             _data.UpdateUser(u);

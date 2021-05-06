@@ -41,6 +41,7 @@ namespace LibraryWebApp.Mapping
                 newModel.UserName = user.UserName;
                 newModel.Password = user.Password;
                 newModel.RoleID_FK = user.RoleID_FK;
+                newModel.Salt = user.Salt;
 
                 toReturn.Add(newModel);
             }

@@ -49,7 +49,8 @@ namespace LibraryDatabaseAccessLayer
                                 FirstName = (string)reader["FirstName"],
                                 UserName = (string)reader["UserName"],
                                 Password = (string)reader["Password"],
-                                RoleID_FK = reader.GetInt32(reader.GetOrdinal("RoleID_FK"))
+                                RoleID_FK = reader.GetInt32(reader.GetOrdinal("RoleID_FK")),
+                                Salt = (string)reader["Salt"],
 
                             };
                             _list.Add(_user);
