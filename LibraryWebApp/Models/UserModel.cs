@@ -31,6 +31,8 @@ namespace LibraryWebApp.Models
         [RegularExpression("^((?=.*[a-z])(?=.*[A-Z])(?=.*\\d)).+$", ErrorMessage = "Must contain One Uppercase, One Lowercase and One number.")]
         public string Password { get; set; }
 
+        public string RoleName { get; set; }
+
         [Required]
         [Range(1, 3, ErrorMessage = "Must be 1-3")]
         public int RoleID_FK { get; set; }

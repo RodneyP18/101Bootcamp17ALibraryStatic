@@ -26,6 +26,19 @@ namespace LibraryWebApp.Mapping
             return toReturn;
         }
 
+        internal static UserModel UserToUserModel(User user)
+        {
+            UserModel _userModel = new UserModel();
+            _userModel.FirstName = user.FirstName;
+            _userModel.LastName = user.LastName;
+            _userModel.Password = user.Password;
+            _userModel.RoleID_FK = user.RoleID_FK;
+            _userModel.RoleName = Mapper.RoleIdToRoleName(user.RoleID_FK);
+            _userModel.UserID = user.UserID;
+            _userModel.UserName = user.UserName;
+            return _userModel;
+        }
+
         internal List<UserModel> UserListToUserModels(List<User> list)
         {
             List<UserModel> toReturn = new List<UserModel>();
@@ -48,6 +61,22 @@ namespace LibraryWebApp.Mapping
 
             return toReturn;
         }
+
+        private static string RoleIdToRoleName(int inRoleId)
+        {
+            switch (inRoleId)
+            {
+                case 1:
+                    return RoleType.Administrator.ToString();
+                case 2:
+                    return RoleType.Librarian.ToString();
+                case 3:
+                    return RoleType.Patron.ToString();
+                default:
+                    return RoleType.Anonymous.ToString();
+            }
+        }
+
 
         internal List<BookModel> BookListToBookModels(List<Book> list)
         {
@@ -85,5 +114,7 @@ namespace LibraryWebApp.Mapping
 
             return toReturn;
         }
+
+       
     }
 }

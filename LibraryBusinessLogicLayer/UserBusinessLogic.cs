@@ -1,6 +1,7 @@
-﻿using LibraryCommon;
+﻿using LibraryBusinessLogicLayer.Hashing;
+using LibraryCommon;
+using LibraryCommon.DataEntity;
 using LibraryDatabaseAccessLayer;
-using LibraryWebApp.Hashing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,21 +43,32 @@ namespace LibraryBusinessLogicLayer
             return _list;
         }
 
-        //public User BLGetUserById(int id)
-        //{
-        //    List<User> users = BLGetUsers();
-        //    User user = new User();
+        public ResultUser LoginUser(User user)
+        {
+            string salt;
+            string hashed = "";
+            ResultUser r = new ResultUser();
+            List<User> users = BLGetUsers();
 
-        //    foreach (User current in users)
-        //    {
-        //        if (current.UserID == id)
-        //        {
-        //            return current;
-                    
-        //        }
-        //    }
-        //    return null;
-        //}
+            User _foundUser = users.Where(u => u.UserName == user.UserName).FirstOrDefault();
+
+            if (_foundUser != null)
+            {
+                salt = _foundUser.Salt;
+                
+                hashed = hash.ComputeSHA256Hash(salt + user.Password);
+
+            }
+
+            if (hashed == _foundUser.Password)
+            {
+                
+                r.User = _foundUser;
+                
+            }
+
+            return r;
+        }
 
         public void BLCreateUser(User u)
         {

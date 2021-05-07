@@ -19,44 +19,62 @@
 @using (Html.BeginForm("CreateUser", "User", FormMethod.Post))
 {
 
-<form>
+    <form>
 
-    <div class="form-group">
-        <label for="name">First Name</label>
-        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "alert-danger" })
-    </div>
+        <div class="form-group">
+            <label for="name">First Name</label>
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "alert-danger" })
+        </div>
 
-    <div class="form-group">
-        <label for="name">Last Name</label>
-        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "alert-danger" })
-    </div>
+        <div class="form-group">
+            <label for="name">Last Name</label>
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "alert-danger" })
+        </div>
 
-    <div class="form-group">
-        <label for="name">Username</label>
-        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "alert-danger" })
-    </div>
-
-
-    <div class="form-group">
-        <label for="name">Password</label>
-        @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "alert-danger" })
-    </div>
-
-    <div class="form-group" hidden="hidden">
-        <label for="name">Role ID</label>
-        
-        @Html.TextBoxFor(m => m.RoleID_FK, htmlAttributes: new { @Value = "3" })
-        @Html.ValidationMessageFor(m => m.RoleID_FK, "", new { @class = "alert-danger" })
-    </div>
-
-    <input type="submit" value="Submit" class="btn btn-primary" />&nbsp;&nbsp;<input type="reset" value="Clear" class="btn btn-primary" />
-
-</form>
+        <div class="form-group">
+            <label for="name">Username</label>
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "alert-danger" })
+        </div>
 
 
+        <div class="form-group">
+            <label for="name">Password</label>
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "alert-danger" })
+        </div>
+
+        <div class="form-group" hidden="hidden">
+            <label for="name">Role ID</label>
+
+            @Html.TextBoxFor(m => m.RoleID_FK, htmlAttributes: new { @Value = "3" })
+            @Html.ValidationMessageFor(m => m.RoleID_FK, "", new { @class = "alert-danger" })
+        </div>
+
+        <input type="submit" value="Submit" class="btn btn-primary" />&nbsp;&nbsp;<input type="reset" value="Clear" class="btn btn-primary" />
+
+    </form>
+
+
+
+}
+
+@section scripts {
+
+    <script type="text/javascript" language="javascript">
+        //function ResetForm() {
+        //}
+        $(document).ready(function () {
+            var SuccessOrFailure = @Html.Raw(Json.Encode(Model.DialogMessageType));
+            if (SuccessOrFailure === 'Success') {
+                $('#dialogSuccess').show();
+            }
+             if (SuccessOrFailure === 'Failure') {
+                $('#dialogFailure').show();
+            }
+        });
+    </script>
 
 }

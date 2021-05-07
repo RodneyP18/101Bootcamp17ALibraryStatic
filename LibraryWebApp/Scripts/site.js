@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
-    $('#tblRoles').DataTable();
-});
+﻿////$(document).ready(function () {
+////    $('#tblUsers').DataTable();
+////});
 

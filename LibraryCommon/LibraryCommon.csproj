@@ -44,6 +44,8 @@
     <Compile Include="DataEntity\Author.cs" />
     <Compile Include="DataEntity\Book.cs" />
     <Compile Include="DataEntity\Genre.cs" />
+    <Compile Include="DataEntity\ResultUser.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataEntity\Publisher.cs" />
     <Compile Include="DataEntity\Role.cs" />

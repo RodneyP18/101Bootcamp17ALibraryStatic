@@ -1,27 +1,28 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>Home Page</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
 
     <link href="../Content/NavBarStyleSheet.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-
     <nav style="position:sticky; top:0; z-index:99">
         <ul id="upNavbar">
 
-            <li><a href="../Views/Home/Login.cshtml">LOGIN</a></li>
+            <li>@Html.ActionLink("Login", "Login", "Home")</li>
+            <li>@Html.ActionLink("Register", "Register", "Home")</li>
             <li><a href="usingthelibrary.html">USING THE LIBRARY</a></li>
-            <li><a href="locationandhours.html">LOCATIONS & HOURS</a></li>
+            <li><a href="~/Static/locationandhours.html">LOCATIONS & HOURS</a></li>
         </ul>
         <div style="background-color:white">
             <img src="https://www.dbrl.org/wp-content/themes/cw-dbrl-theme/images/DBRL-linear-transparent.png" width="400" id="image" sytle=" float: left" />
         </div>
     </nav>
-    
+
 
     <!--<p style="float:right"> Hours </p>-->
     <div>
@@ -46,32 +47,13 @@
         </form>
     </div>
     <div>
-        <p>
-            ad
-        </p>
-        <p>
-            ad
-        </p>
-
-        <p>
-            ad
-        </p>
-        <p>
-            ad
-        </p>
-        <p>
-            ad
-        </p>
-        <p>
-            ad
-        </p>
-
+        @RenderBody()
     </div>
 
     <footer id="footer" style="background-color:#265069">
 
         <div>
-            <a href="home.html"><img src="https://www.dbrl.org/wp-content/themes/cw-dbrl-theme/images/DBRL-linear-white.png" width="400" style="padding-bottom:20px"/></a>
+            <a href="/Static/home.html"><img src="https://www.dbrl.org/wp-content/themes/cw-dbrl-theme/images/DBRL-linear-white.png" width="400" style="padding-bottom:20px" /></a>
             <div style="float:right; padding-right:60px; padding-top:20px">
                 <a href="https://www.facebook.com"><i class="fa fa-facebook" style="font-size:30px"></i></a>
                 <a href="https://www.twitter.com"><i class="fa fa-twitter" style="font-size:30px"></i></a>
@@ -97,6 +79,9 @@
 
     </footer>
 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/library")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
-

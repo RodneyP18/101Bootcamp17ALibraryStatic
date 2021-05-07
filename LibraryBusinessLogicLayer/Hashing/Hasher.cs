@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace LibraryWebApp.Hashing
+namespace LibraryBusinessLogicLayer.Hashing
 {
     public class Hasher
     {
