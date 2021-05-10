@@ -43,20 +43,29 @@ namespace LibraryBusinessLogicLayer
             return _list;
         }
 
-        public ResultUser LoginUser(User user)
+        public ResultUser LoginUser(User userToCheck)
         {
             string salt;
             string hashed = "";
             ResultUser r = new ResultUser();
             List<User> users = BLGetUsers();
+            User _foundUser = new User();
 
-            User _foundUser = users.Where(u => u.UserName == user.UserName).FirstOrDefault();
+            foreach (User current in users)
+            {
+                if (current.UserName == userToCheck.UserName)
+                {
+                    _foundUser = current;
+                }
+            }
+
+            //User _foundUser = users.Where(u => u.UserName == userToCheck.UserName).FirstOrDefault();
 
             if (_foundUser != null)
             {
                 salt = _foundUser.Salt;
                 
-                hashed = hash.ComputeSHA256Hash(salt + user.Password);
+                hashed = hash.ComputeSHA256Hash(salt + userToCheck.Password);
 
             }
 

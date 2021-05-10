@@ -41,6 +41,7 @@ namespace LibraryWebApp.Controllers
         {
             RoleListVM list = new RoleListVM(roleBL.BLGetRoles());
             ViewBag.Roles = new SelectList(list.ListOfRoleModels, "RoleId", "RoleName");
+
             return View();
         }
 
@@ -73,8 +74,10 @@ namespace LibraryWebApp.Controllers
         {
             RoleListVM list = new RoleListVM(roleBL.BLGetRoles());
             ViewBag.Roles = new SelectList(list.ListOfRoleModels, "RoleId", "RoleName");
+
             model.UserID = id;
             model.RoleID_FK = roleID;
+
             return View(model);
         }
 

@@ -63,7 +63,7 @@ namespace LibraryDatabaseAccessLayer
         }
 
 
-        public int CreateBook(Book b)
+        public void CreateBook(Book b)
         {
             using (SqlConnection con = new SqlConnection(_conn))
             {
@@ -129,18 +129,14 @@ namespace LibraryDatabaseAccessLayer
                     _sqlCommand.Parameters.Add(_paramPublisherIDFK);
 
 
-                    SqlParameter _paramBookIDReturn = _sqlCommand.CreateParameter();
-                    _paramBookIDReturn.DbType = DbType.Int32;
-                    _paramBookIDReturn.ParameterName = "@ParamOutBookID";
-                    _sqlCommand.Parameters.Add(_paramBookIDReturn);
-                    _paramBookIDReturn.Direction = ParameterDirection.Output;
+                    
 
 
                     con.Open();
                     _sqlCommand.ExecuteNonQuery();   // calls the sp                                                      
-                    var result = _paramBookIDReturn.Value;
+                    
                     con.Close();
-                    return (int)result;
+                    
                 }
             }
         }

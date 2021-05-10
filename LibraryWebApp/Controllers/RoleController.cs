@@ -12,10 +12,12 @@ namespace LibraryWebApp.Controllers
     public class RoleController : Controller
     {
         private readonly string _dbConn;
+        RoleBusinessLogic roleBL;
 
         public RoleController() : base()
         {
             _dbConn = System.Configuration.ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
+            roleBL = new RoleBusinessLogic(_dbConn);
         }
 
         public ActionResult Index()
@@ -26,8 +28,6 @@ namespace LibraryWebApp.Controllers
         [HttpGet]
         public ActionResult GetRoles()
         {
-
-            RoleBusinessLogic roleBL = new RoleBusinessLogic(_dbConn);
             List<Role> _list = roleBL.BLGetRoles();
             RoleListVM model = new RoleListVM(_list);
             return View(model);
@@ -42,19 +42,31 @@ namespace LibraryWebApp.Controllers
         [HttpPost]
         public ActionResult CreateRole(RoleModel model)
         {
-            return View();
+            Role role = new Role();
+
+            role.RoleName = model.RoleName;
+
+            roleBL.BLCreateRole(role);
+
+            return RedirectToAction("GetRoles", "Role");
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult UpdateRole()
         {
             return View();
         }
 
         [HttpPost]
+        public ActionResult UpdateRole(RoleModel model, int id)
+        {
+            return RedirectToAction("GetRoles", "Role");
+        }
+
+        [HttpPost]
         public ActionResult DeleteRole()
         {
-            return View();
+            return RedirectToAction("GetRoles", "Role");
         }
     }
 }

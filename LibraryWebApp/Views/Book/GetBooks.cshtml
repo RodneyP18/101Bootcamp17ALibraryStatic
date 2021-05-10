@@ -1,0 +1,91 @@
+﻿@model LibraryWebApp.Models.BookListVM
+@using LibraryWebApp.Models
+
+@{
+    ViewBag.Title = "GetBooks";
+}
+
+<h2>GetBooks</h2>
+
+
+<table class="display" style="width:100%" id="tblBook">
+    <thead>
+        <tr>
+            <th hidden="hidden"></th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Paperback</th>
+            <th>Published Date</th>
+            <th>Publisher</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Update</th>
+            <th>Delete</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @{
+
+            foreach (BookModel book in Model.ListOfBookModels)
+            {
+                <tr>
+                    <td hidden="hidden">@book.BookID</td>
+                    <td>@book.Title</td>
+                    <td>@book.Description</td>
+                    <td>@book.Price</td>
+                    <td>@book.IsPaperback</td>
+                    <td>@book.PublishDate</td>
+                    <td>@book.PublisherID_FK</td>
+                    <td>@book.AuthorID_FK</td>
+                    <td>@book.GenreID_FK</td>
+
+                    <td>
+                        @using (Html.BeginForm("UpdateBook", "Book", FormMethod.Get))
+                        {
+                            <input type="hidden" name="id" value="@book.BookID" />
+                            <input type="hidden" name="title" value="@book.Title" />
+                            <input type="hidden" name="desc" value="@book.Description" />
+                            <input type="hidden" name="price" value="@book.Price" />
+                            <input type="hidden" name="paperBack" value="@book.IsPaperback" />
+                            <input type="hidden" name="date" value="@book.PublishDate" />
+                            <input type="hidden" name="pubID" value="@book.PublisherID_FK" />
+                            <input type="hidden" name="authID" value="@book.AuthorID_FK" />
+                            <input type="hidden" name="genID" value="@book.GenreID_FK" />
+
+                            <input class="btn btn-link" type="submit" value="Update" />
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("DeleteBook", "Book", FormMethod.Post))
+                        {
+                            <input type="hidden" name="id" value="@book.BookID" />
+                            <input class="btn btn-danger" type="submit" value="Delete" />
+                        }
+
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div>
+    <input value="Add Book" type="button" class="btn btn-info" onclick="window.location='@Url.Action("CreateBook", "Book")'" />
+</div>
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#tblBook').DataTable();
+
+        });
+
+    </script>
+
+}

@@ -71,8 +71,7 @@ namespace LibraryDatabaseAccessLayer
                 {
                     _sqlCommand.CommandType = CommandType.StoredProcedure;
                     _sqlCommand.CommandTimeout = 30;
-                    //_sqlCommand.Parameters.AddWithValue("@ParamRoleName", r.RoleName);
-                    //_sqlCommand.Parameters.Add("@ParamRoleName", SqlDbType.NVarChar(100)).Value = r.RoleName;
+                    
                     SqlParameter _paramFirstName = _sqlCommand.CreateParameter();
                     _paramFirstName.DbType = DbType.String;
                     _paramFirstName.ParameterName = "@ParamFirstName";

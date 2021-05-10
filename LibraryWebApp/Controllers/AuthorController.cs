@@ -12,9 +12,12 @@ namespace LibraryWebApp.Controllers
     public class AuthorController : Controller
     {
         private readonly string _dbConn;
+        AuthorBusinessLogic authorBL;
+
         public AuthorController() : base()
         {
             _dbConn = System.Configuration.ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
+            authorBL = new AuthorBusinessLogic(_dbConn);
         }
 
         public ActionResult Index()
@@ -25,7 +28,7 @@ namespace LibraryWebApp.Controllers
         [HttpGet]
         public ActionResult GetAuthors()
         {
-            AuthorBusinessLogic authorBL = new AuthorBusinessLogic(_dbConn);
+            
             List<LibraryCommon.Author> _list = authorBL.BLGetAuthors();
 
             AuthorListVM model = new AuthorListVM(_list);
