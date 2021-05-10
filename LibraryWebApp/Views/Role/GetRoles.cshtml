@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        @{          
+        @{
             foreach (RoleModel current in Model.ListOfRoleModels)
             {
                 <tr>
@@ -29,13 +29,43 @@
                         @current.RoleName
                     </td>
                     <td>
-                        <button onclick="">Update</button>
+                        @using (Html.BeginForm("UpdateRole", "Role", FormMethod.Get))
+                        {
+                            <input type="hidden" name="id" value="@current.RoleID" />
+                            <input type="hidden" name="name" value="@current.RoleName" />
+
+                            <input class="btn btn-link" type="submit" value="Update" />
+                        }
                     </td>
                     <td>
-                        <button onclick="">Delete</button>
+                        @using (Html.BeginForm("DeleteRole", "Role", FormMethod.Post))
+                        {
+                            <input type="hidden" name="id" value="@current.RoleID" />
+                            <input class="btn btn-danger" type="submit" value="Delete" />
+                        }
+
                     </td>
                 </tr>
             }
         }
     </tbody>
 </table>
+
+<div>
+    <input value="Add Role" type="button" class="btn btn-info" onclick="window.location='@Url.Action("CreateRole", "Role")'" />
+</div>
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#tblRoles').DataTable();
+
+        });
+
+    </script>
+
+}

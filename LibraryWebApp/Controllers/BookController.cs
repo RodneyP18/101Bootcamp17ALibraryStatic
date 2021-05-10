@@ -117,7 +117,9 @@ namespace LibraryWebApp.Controllers
         public ActionResult DeleteBook(int id)
         {
             Book toDelete = new Book();
+
             toDelete.BookID = id;
+
             bookBL.BLDeleteBook(toDelete);
 
             return RedirectToAction("GetBooks", "Book");

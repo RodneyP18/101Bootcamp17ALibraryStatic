@@ -92,7 +92,7 @@ namespace LibraryDatabaseAccessLayer
 
                     SqlParameter _paramDateOfBirth = _sqlCommand.CreateParameter();
                     _paramDateOfBirth.DbType = DbType.DateTime;
-                    _paramDateOfBirth.ParameterName = "@ParamDateOfBirth";
+                    _paramDateOfBirth.ParameterName = "@ParamBirthDate";
                     _paramDateOfBirth.Value = a.DateOfBirth;
                     _sqlCommand.Parameters.Add(_paramDateOfBirth);
 

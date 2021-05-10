@@ -1,0 +1,92 @@
+﻿@model LibraryWebApp.Models.AuthorListVM
+@using LibraryWebApp.Models
+
+@{
+    ViewBag.Title = "GetAuthors";
+}
+
+<h2>GetAuthors</h2>
+
+
+<table class="display" style="width:100%" id="tblAuthors">
+    <thead>
+        <tr>
+            <th hidden="hidden"></th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Bio</th>
+            <th>Birthdate</th>
+            <th>Birth Location</th>
+            <th>Update Author</th>
+            <th>Delete Author</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+
+            foreach (AuthorModel current in Model.ListOfAuthorModels)
+            {
+                <tr>
+                    <td hidden="hidden">
+                        @Html.Hidden(current.AuthorID.ToString())
+                    </td>
+                    <td>
+                        @current.FirstName
+                    </td>
+                    <td>
+                        @current.LastName
+                    </td>
+                    <td>
+                        @current.Bio
+                    </td>
+                    <td>
+                        @current.DateOfBirth
+                    </td>
+                    <td>
+                        @current.BirthLocation
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("UpdateAuthor", "Author", FormMethod.Get))
+                        {
+                            <input type="hidden" name="id" value="@current.AuthorID" />
+                            <input type="hidden" name="firstName" value="@current.FirstName" />
+                            <input type="hidden" name="lastName" value="@current.LastName" />
+                            <input type="hidden" name="userName" value="@current.Bio" />
+                            <input type="hidden" name="password" value="@current.DateOfBirth" />
+                            <input type="hidden" name="roleID" value="@current.BirthLocation" />
+
+                            <input class="btn btn-link" type="submit" value="Update" />
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("DeleteAuthor", "Author", FormMethod.Post))
+                        {
+                            <input type="hidden" name="id" value="@current.AuthorID" />
+                            <input class="btn btn-danger" type="submit" value="Delete" />
+                        }
+
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div>
+    <input value="Add Author" type="button" class="btn btn-info" onclick="window.location='@Url.Action("CreateAuthor", "Author")'" />
+</div>
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#tblAuthors').DataTable();
+
+        });
+
+    </script>
+
+}

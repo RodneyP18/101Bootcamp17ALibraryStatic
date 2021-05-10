@@ -52,20 +52,35 @@ namespace LibraryWebApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult UpdateRole()
+        public ActionResult UpdateRole(RoleModel model, int id)
         {
-            return View();
+            model.RoleID = id;
+
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult UpdateRole(RoleModel model, int id)
+        public ActionResult UpdateRole(RoleModel model)
         {
+            Role role = new Role();
+
+            role.RoleID = model.RoleID;
+            role.RoleName = model.RoleName;
+
+            roleBL.BLUpdateRole(role);
+
             return RedirectToAction("GetRoles", "Role");
         }
 
         [HttpPost]
-        public ActionResult DeleteRole()
+        public ActionResult DeleteRole(int id)
         {
+            Role role = new Role();
+
+            role.RoleID = id;
+
+            roleBL.BLDeleteRole(role);
+
             return RedirectToAction("GetRoles", "Role");
         }
     }

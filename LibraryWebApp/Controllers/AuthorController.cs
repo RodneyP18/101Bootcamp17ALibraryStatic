@@ -1,4 +1,5 @@
 ﻿using LibraryBusinessLogicLayer;
+using LibraryCommon;
 using LibraryWebApp.Mapping;
 using LibraryWebApp.Models;
 using System;
@@ -44,19 +45,53 @@ namespace LibraryWebApp.Controllers
         [HttpPost]
         public ActionResult CreateAuthor(AuthorModel model)
         {
-            return View();
+            Author author = new Author();
+
+            author.FirstName = model.FirstName;
+            author.LastName = model.LastName;
+            author.Bio = model.Bio;
+            author.DateOfBirth = model.DateOfBirth;
+            author.BirthLocation = model.BirthLocation;
+
+            authorBL.BLCreateAuthor(author);
+
+            return RedirectToAction("GetAuthors", "Author");
+        }
+
+        [HttpGet]
+        public ActionResult UpdateAuthor(AuthorModel model, int id)
+        {
+            model.AuthorID = id;
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult UpdateAuthor()
+        public ActionResult UpdateAuthor(AuthorModel model)
         {
-            return View();
+            Author author = new Author();
+
+            author.AuthorID = model.AuthorID;
+            author.FirstName = model.FirstName;
+            author.LastName = model.LastName;
+            author.Bio = model.Bio;
+            author.DateOfBirth = model.DateOfBirth;
+            author.BirthLocation = model.BirthLocation;
+
+            authorBL.BLUpdateAuthor(author);
+
+            return RedirectToAction("GetAuthors", "Author");
         }
 
         [HttpPost]
-        public ActionResult DeleteAuthor()
+        public ActionResult DeleteAuthor(int id)
         {
-            return View();
+            Author author = new Author();
+
+            author.AuthorID = id;
+
+            authorBL.BLDeleteAuthor(author);
+
+            return RedirectToAction("GetAuthors", "Author");
         }
     }
 }

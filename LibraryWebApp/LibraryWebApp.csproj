@@ -561,10 +561,14 @@
     <Content Include="Views\Genre\GetGenres.cshtml" />
     <Content Include="Views\Genre\CreateGenre.cshtml" />
     <Content Include="Views\Genre\UpdateGenre.cshtml" />
+    <Content Include="Views\Author\CreateAuthor.cshtml" />
+    <Content Include="Views\Author\UpdateAuthor.cshtml" />
+    <Content Include="Views\Author\GetAuthors.cshtml" />
+    <Content Include="Views\Role\CreateRole.cshtml" />
+    <Content Include="Views\Role\UpdateRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Author\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

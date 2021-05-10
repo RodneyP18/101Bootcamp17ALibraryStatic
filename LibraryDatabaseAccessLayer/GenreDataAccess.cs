@@ -35,7 +35,7 @@ namespace LibraryDatabaseAccessLayer
                 {
                     _sqlCommand.CommandType = CommandType.StoredProcedure;
                     _sqlCommand.CommandTimeout = 35;
-                    //_sqlCommand.Parameters.AddWithValue("@BookID", inOneParticularBook);
+                    
                     con.Open();
                     Genre _Genre;
                     using (SqlDataReader reader = _sqlCommand.ExecuteReader())
@@ -97,7 +97,8 @@ namespace LibraryDatabaseAccessLayer
 
                     SqlParameter _paramIsFiction = _sqlCommand.CreateParameter();
                     _paramIsFiction.DbType = DbType.Boolean;
-                    _paramIsFiction.ParameterName = "@ParamGenre";
+                    _paramIsFiction.ParameterName = "@ParamIsFiction";
+                    _paramIsFiction.Value = g.IsFiction;
                     _sqlCommand.Parameters.Add(_paramIsFiction);
 
 
@@ -129,21 +130,21 @@ namespace LibraryDatabaseAccessLayer
 
                     SqlParameter _paramGenreName = _sqlCommand.CreateParameter();
                     _paramGenreName.DbType = DbType.String;
-                    _paramGenreName.ParameterName = "@ParamGenreName";
+                    _paramGenreName.ParameterName = "@ParamName";
                     _paramGenreName.Value = g.Name;
                     _sqlCommand.Parameters.Add(_paramGenreName);
 
 
                     SqlParameter _paramGenreIsFiction = _sqlCommand.CreateParameter();
                     _paramGenreIsFiction.DbType = DbType.Boolean;
-                    _paramGenreIsFiction.ParameterName = "@ParamGenreIsFiction";
+                    _paramGenreIsFiction.ParameterName = "@ParamIsFiction";
                     _paramGenreIsFiction.Value = g.IsFiction;
                     _sqlCommand.Parameters.Add(_paramGenreIsFiction);
 
 
                     SqlParameter _paramGenreDescription = _sqlCommand.CreateParameter();
                     _paramGenreDescription.DbType = DbType.String;
-                    _paramGenreDescription.ParameterName = "@ParamGenreDescription";
+                    _paramGenreDescription.ParameterName = "@ParamDescription";
                     _paramGenreDescription.Value = g.Description;
                     _sqlCommand.Parameters.Add(_paramGenreDescription);
 

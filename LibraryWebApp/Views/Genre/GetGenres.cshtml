@@ -9,51 +9,56 @@
 
 
 <table class="display" id="tblGenres" style="width:100%">
-    <tr>
-        <th hidden="hidden"></th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Fiction</th>
-        <th>Update Genre</th>
-        <th>Delete Genre</th>
-    </tr>
-
-    @foreach (GenreModel current in Model.ListOfGenreModels)
-    {
+    <thead>
         <tr>
-            <td hidden="hidden">
-                @Html.Hidden(current.GenreID.ToString())
-            </td>
-            <td>
-                @current.Name
-            </td>
-            <td>
-                @current.Description
-            </td>
-            <td>
-                @current.IsFiction
-            </td>
-            <td>
-                @using (Html.BeginForm("UpdateGenre", "Genre", FormMethod.Get))
-                {
-                    <input type="hidden" name="id" value="@current.GenreID" />
-                    <input type="hidden" name="name" value="@current.Name" />
-                    <input type="hidden" name="address" value="@current.Description" />
-                    <input type="hidden" name="city" value="@current.IsFiction" />
-                    <input class="btn btn-link" type="submit" value="Update" />
-                }
-            </td>
-            <td>
-                @using (Html.BeginForm("DeleteGenre", "Genre", FormMethod.Post))
-                {
-                    <input type="hidden" name="id" value="@current.GenreID" />
-                    <input class="btn btn-danger" type="submit" value="Delete" />
-                }
-
-            </td>
+            <th hidden="hidden"></th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Fiction</th>
+            <th>Update Genre</th>
+            <th>Delete Genre</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @{
 
+            foreach (GenreModel current in Model.ListOfGenreModels)
+            {
+                <tr>
+                    <td hidden="hidden">
+                        @Html.Hidden(current.GenreID.ToString())
+                    </td>
+                    <td>
+                        @current.Name
+                    </td>
+                    <td>
+                        @current.Description
+                    </td>
+                    <td>
+                        @current.IsFiction
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("UpdateGenre", "Genre", FormMethod.Get))
+                        {
+                            <input type="hidden" name="id" value="@current.GenreID" />
+                            <input type="hidden" name="name" value="@current.Name" />
+                            <input type="hidden" name="address" value="@current.Description" />
+                            <input type="hidden" name="city" value="@current.IsFiction" />
+                            <input class="btn btn-link" type="submit" value="Update" />
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("DeleteGenre", "Genre", FormMethod.Post))
+                        {
+                            <input type="hidden" name="id" value="@current.GenreID" />
+                            <input class="btn btn-danger" type="submit" value="Delete" />
+                        }
+
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
 </table>
 
 <div>
